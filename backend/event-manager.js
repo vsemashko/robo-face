@@ -11,16 +11,15 @@ class EventManager extends EventEmitter {
     this.stateHistory = [];
     this.maxHistorySize = 50;
 
-    // Animation state configuration
-    this.states = {
-      idle: { priority: 0, interruptible: true },
-      happy: { priority: 5, interruptible: true },
-      thinking: { priority: 3, interruptible: true },
-      alert: { priority: 8, interruptible: false },
-      sad: { priority: 4, interruptible: true },
-      surprised: { priority: 7, interruptible: false },
-      sleeping: { priority: 1, interruptible: true }
-    };
+    // Load states from config
+    this.states = {};
+    Object.keys(eventConfig.states || {}).forEach(stateName => {
+      const stateConfig = eventConfig.states[stateName];
+      this.states[stateName] = {
+        priority: stateConfig.priority || 0,
+        interruptible: stateConfig.priority < 8  // High priority states (8+) are non-interruptible
+      };
+    });
 
     // Load event mappings from config
     this.eventMappings = eventConfig.mappings || {};

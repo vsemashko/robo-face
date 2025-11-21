@@ -13,6 +13,10 @@
         <!-- Debug info (hidden in production) -->
         <div id="debug-info" class="debug-info">
             <div class="debug-item">
+                <span class="label">Character:</span>
+                <span id="debug-character">robo-face</span>
+            </div>
+            <div class="debug-item">
                 <span class="label">State:</span>
                 <span id="debug-state">idle</span>
             </div>
@@ -26,9 +30,25 @@
             </div>
         </div>
 
+        <!-- Character selector (hidden in production) -->
+        <div id="character-selector" class="character-selector">
+            <h3>Character</h3>
+            <div class="character-buttons">
+                <button onclick="window.app.switchCharacter('robo-face')" class="char-btn active" data-char="robo-face">
+                    🤖 Robo-Face
+                </button>
+                <button onclick="window.app.switchCharacter('cat-face')" class="char-btn" data-char="cat-face">
+                    🐱 Cat-Face
+                </button>
+                <button onclick="window.app.switchCharacter('pixel-friend')" class="char-btn" data-char="pixel-friend">
+                    👾 Pixel-Friend
+                </button>
+            </div>
+        </div>
+
         <!-- Test controls (hidden in production) -->
         <div id="test-controls" class="test-controls">
-            <h3>Test Controls</h3>
+            <h3>Emotions</h3>
             <div class="button-grid">
                 <button onclick="window.app.triggerEmotion('idle')">Idle</button>
                 <button onclick="window.app.triggerEmotion('happy')">Happy</button>
@@ -37,6 +57,13 @@
                 <button onclick="window.app.triggerEmotion('sad')">Sad</button>
                 <button onclick="window.app.triggerEmotion('surprised')">Surprised</button>
                 <button onclick="window.app.triggerEmotion('sleeping')">Sleeping</button>
+                <button onclick="window.app.triggerEmotion('excited')">Excited</button>
+                <button onclick="window.app.triggerEmotion('confused')">Confused</button>
+                <button onclick="window.app.triggerEmotion('angry')">Angry</button>
+                <button onclick="window.app.triggerEmotion('loving')">Loving</button>
+                <button onclick="window.app.triggerEmotion('bored')">Bored</button>
+                <button onclick="window.app.triggerEmotion('curious')">Curious</button>
+                <button onclick="window.app.triggerEmotion('scared')">Scared</button>
             </div>
         </div>
     </div>
@@ -44,7 +71,14 @@
     <!-- Load modules -->
     <script src="js/renderer.js"></script>
     <script src="js/animator.js"></script>
-    <script src="js/character.js"></script>
+
+    <!-- Load character system -->
+    <script src="js/characters/base-character.js"></script>
+    <script src="js/characters/robo-face.js"></script>
+    <script src="js/characters/cat-face.js"></script>
+    <script src="js/characters/pixel-friend.js"></script>
+    <script src="js/character-manager.js"></script>
+
     <script src="js/websocket-client.js"></script>
     <script src="js/main.js"></script>
 </body>

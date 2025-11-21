@@ -7,10 +7,11 @@ class RoboFaceApp {
     this.canvas = document.getElementById('canvas');
     this.renderer = new Renderer(this.canvas);
     this.animator = new Animator(30); // 30 FPS
-    this.character = new RoboFace(this.renderer, this.animator);
+    this.characterManager = new CharacterManager(this.renderer, this.animator);
     this.wsClient = new WebSocketClient();
 
     // Debug elements
+    this.debugCharacter = document.getElementById('debug-character');
     this.debugState = document.getElementById('debug-state');
     this.debugFps = document.getElementById('debug-fps');
     this.debugConnection = document.getElementById('debug-connection');
@@ -40,7 +41,7 @@ class RoboFaceApp {
     // Set up WebSocket handlers
     this.wsClient.onStateChange((state, duration) => {
       console.log(`State change: ${state} (${duration}ms)`);
-      this.character.setState(state);
+      this.characterManager.setState(state);
     });
 
     this.wsClient.onConnectionChange((status) => {
@@ -57,6 +58,9 @@ class RoboFaceApp {
     // Update debug info periodically
     setInterval(() => this.updateDebugInfo(), 100);
 
+    // Update character selector UI
+    this.updateCharacterSelector();
+
     // Expose to window for test controls
     window.app = this;
 
@@ -67,7 +71,7 @@ class RoboFaceApp {
    * Update game state
    */
   update(deltaTime) {
-    this.character.update(deltaTime);
+    this.characterManager.update(deltaTime);
   }
 
   /**
@@ -75,20 +79,40 @@ class RoboFaceApp {
    */
   render(deltaTime) {
     this.renderer.clear();
-    this.character.render();
+    this.characterManager.render();
   }
 
   /**
    * Update debug information
    */
   updateDebugInfo() {
+    if (this.debugCharacter) {
+      this.debugCharacter.textContent = this.characterManager.getCharacterType();
+    }
+
     if (this.debugState) {
-      this.debugState.textContent = this.character.getState();
+      this.debugState.textContent = this.characterManager.getState();
     }
 
     if (this.debugFps) {
       this.debugFps.textContent = this.animator.getFps();
     }
+  }
+
+  /**
+   * Update character selector buttons
+   */
+  updateCharacterSelector() {
+    const currentChar = this.characterManager.getCharacterType();
+    const buttons = document.querySelectorAll('.char-btn');
+
+    buttons.forEach(btn => {
+      if (btn.dataset.char === currentChar) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
   }
 
   /**
@@ -99,6 +123,20 @@ class RoboFaceApp {
       this.debugConnection.textContent = status;
       this.debugConnection.className = status;
     }
+  }
+
+  /**
+   * Switch character
+   */
+  switchCharacter(characterType) {
+    console.log(`Switching to character: ${characterType}`);
+    const success = this.characterManager.switchCharacter(characterType);
+
+    if (success) {
+      this.updateCharacterSelector();
+    }
+
+    return success;
   }
 
   /**
@@ -120,7 +158,7 @@ class RoboFaceApp {
    * Get current state
    */
   getState() {
-    return this.character.getState();
+    return this.characterManager.getState();
   }
 
   /**

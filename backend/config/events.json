@@ -20,6 +20,11 @@
       "duration": 4000,
       "description": "System update"
     },
+    "system.overload": {
+      "state": "angry",
+      "duration": 6000,
+      "description": "System overload"
+    },
     "time.hourly": {
       "state": "idle",
       "duration": 2000,
@@ -36,8 +41,8 @@
       "description": "Evening wind-down"
     },
     "time.idle": {
-      "state": "sleeping",
-      "duration": 10000,
+      "state": "bored",
+      "duration": 8000,
       "description": "Idle timeout"
     },
     "notification.message": {
@@ -50,6 +55,16 @@
       "duration": 5000,
       "description": "Alert notification"
     },
+    "notification.love": {
+      "state": "loving",
+      "duration": 4000,
+      "description": "Like or love received"
+    },
+    "notification.achievement": {
+      "state": "excited",
+      "duration": 5000,
+      "description": "Achievement unlocked"
+    },
     "sensor.motion": {
       "state": "surprised",
       "duration": 2000,
@@ -60,6 +75,21 @@
       "duration": 2000,
       "description": "Button pressed"
     },
+    "sensor.unknown": {
+      "state": "confused",
+      "duration": 3000,
+      "description": "Unknown sensor reading"
+    },
+    "sensor.danger": {
+      "state": "scared",
+      "duration": 4000,
+      "description": "Danger detected"
+    },
+    "user.question": {
+      "state": "curious",
+      "duration": 3000,
+      "description": "Question or inquiry"
+    },
     "api.trigger": {
       "state": "thinking",
       "duration": 3000,
@@ -69,31 +99,73 @@
   "states": {
     "idle": {
       "description": "Default calm state",
-      "color": "#4A90E2"
+      "color": "#4A90E2",
+      "priority": 0
     },
     "happy": {
       "description": "Positive emotions",
-      "color": "#7ED321"
+      "color": "#7ED321",
+      "priority": 5
     },
     "thinking": {
       "description": "Processing or working",
-      "color": "#F5A623"
+      "color": "#F5A623",
+      "priority": 3
     },
     "alert": {
       "description": "Warning or important notification",
-      "color": "#F8E71C"
+      "color": "#F8E71C",
+      "priority": 8
     },
     "sad": {
       "description": "Error or negative event",
-      "color": "#D0021B"
+      "color": "#D0021B",
+      "priority": 4
     },
     "surprised": {
       "description": "Unexpected event",
-      "color": "#BD10E0"
+      "color": "#BD10E0",
+      "priority": 7
     },
     "sleeping": {
       "description": "Inactive or resting",
-      "color": "#4A4A4A"
+      "color": "#4A4A4A",
+      "priority": 1
+    },
+    "excited": {
+      "description": "Very happy and energetic",
+      "color": "#FF6B6B",
+      "priority": 6
+    },
+    "confused": {
+      "description": "Uncertain or puzzled",
+      "color": "#9B59B6",
+      "priority": 3
+    },
+    "angry": {
+      "description": "Frustrated or upset",
+      "color": "#E74C3C",
+      "priority": 7
+    },
+    "loving": {
+      "description": "Affectionate and warm",
+      "color": "#FF69B4",
+      "priority": 5
+    },
+    "bored": {
+      "description": "Uninterested and waiting",
+      "color": "#95A5A6",
+      "priority": 2
+    },
+    "curious": {
+      "description": "Interested and inquisitive",
+      "color": "#3498DB",
+      "priority": 4
+    },
+    "scared": {
+      "description": "Fearful or worried",
+      "color": "#8E44AD",
+      "priority": 8
     }
   }
 }

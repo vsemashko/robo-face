@@ -106,9 +106,64 @@ body {
     transform: scale(0.95);
 }
 
+/* Character Selector */
+.character-selector {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.character-selector h3 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+}
+
+.character-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.char-btn {
+    padding: 10px 15px;
+    background: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px;
+    text-align: left;
+    min-width: 150px;
+}
+
+.char-btn:hover {
+    background: #3a3a3a;
+    border-color: #4A90E2;
+    transform: translateX(-2px);
+}
+
+.char-btn:active {
+    transform: scale(0.98);
+}
+
+.char-btn.active {
+    background: #4A90E2;
+    border-color: #7AC5FF;
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+}
+
 /* Production Mode - Hide debug elements */
 body.production .debug-info,
-body.production .test-controls {
+body.production .test-controls,
+body.production .character-selector {
     display: none !important;
 }
 
