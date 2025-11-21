@@ -1,0 +1,18 @@
+[Unit]
+Description=Chromium Kiosk Display for Robo Face
+After=graphical.target robo-face.service
+Wants=graphical.target
+Requires=robo-face.service
+
+[Service]
+Type=simple
+User=pi
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/pi/.Xauthority
+ExecStartPre=/bin/sleep 5
+ExecStart=/home/pi/robo-face/deployment/scripts/start-kiosk.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=graphical.target

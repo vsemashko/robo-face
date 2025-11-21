@@ -1,0 +1,99 @@
+{
+  "mappings": {
+    "system.boot": {
+      "state": "happy",
+      "duration": 5000,
+      "description": "System startup"
+    },
+    "system.shutdown": {
+      "state": "sleeping",
+      "duration": 3000,
+      "description": "System shutdown"
+    },
+    "system.error": {
+      "state": "sad",
+      "duration": 5000,
+      "description": "System error occurred"
+    },
+    "system.update": {
+      "state": "thinking",
+      "duration": 4000,
+      "description": "System update"
+    },
+    "time.hourly": {
+      "state": "idle",
+      "duration": 2000,
+      "description": "Hourly check-in"
+    },
+    "time.morning": {
+      "state": "happy",
+      "duration": 4000,
+      "description": "Morning greeting"
+    },
+    "time.evening": {
+      "state": "sleeping",
+      "duration": 3000,
+      "description": "Evening wind-down"
+    },
+    "time.idle": {
+      "state": "sleeping",
+      "duration": 10000,
+      "description": "Idle timeout"
+    },
+    "notification.message": {
+      "state": "happy",
+      "duration": 3000,
+      "description": "New message received"
+    },
+    "notification.alert": {
+      "state": "alert",
+      "duration": 5000,
+      "description": "Alert notification"
+    },
+    "sensor.motion": {
+      "state": "surprised",
+      "duration": 2000,
+      "description": "Motion detected"
+    },
+    "sensor.button": {
+      "state": "happy",
+      "duration": 2000,
+      "description": "Button pressed"
+    },
+    "api.trigger": {
+      "state": "thinking",
+      "duration": 3000,
+      "description": "API triggered event"
+    }
+  },
+  "states": {
+    "idle": {
+      "description": "Default calm state",
+      "color": "#4A90E2"
+    },
+    "happy": {
+      "description": "Positive emotions",
+      "color": "#7ED321"
+    },
+    "thinking": {
+      "description": "Processing or working",
+      "color": "#F5A623"
+    },
+    "alert": {
+      "description": "Warning or important notification",
+      "color": "#F8E71C"
+    },
+    "sad": {
+      "description": "Error or negative event",
+      "color": "#D0021B"
+    },
+    "surprised": {
+      "description": "Unexpected event",
+      "color": "#BD10E0"
+    },
+    "sleeping": {
+      "description": "Inactive or resting",
+      "color": "#4A4A4A"
+    }
+  }
+}

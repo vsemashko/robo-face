@@ -1,0 +1,22 @@
+[Unit]
+Description=Robo Face Backend Server
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/robo-face
+ExecStart=/usr/bin/node backend/server.js
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Environment variables
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=CHARACTER=robo-face
+Environment=TARGET_FPS=30
+
+[Install]
+WantedBy=multi-user.target

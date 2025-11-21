@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robo-Face</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <canvas id="canvas"></canvas>
+
+        <!-- Debug info (hidden in production) -->
+        <div id="debug-info" class="debug-info">
+            <div class="debug-item">
+                <span class="label">State:</span>
+                <span id="debug-state">idle</span>
+            </div>
+            <div class="debug-item">
+                <span class="label">FPS:</span>
+                <span id="debug-fps">0</span>
+            </div>
+            <div class="debug-item">
+                <span class="label">Connection:</span>
+                <span id="debug-connection">disconnected</span>
+            </div>
+        </div>
+
+        <!-- Test controls (hidden in production) -->
+        <div id="test-controls" class="test-controls">
+            <h3>Test Controls</h3>
+            <div class="button-grid">
+                <button onclick="window.app.triggerEmotion('idle')">Idle</button>
+                <button onclick="window.app.triggerEmotion('happy')">Happy</button>
+                <button onclick="window.app.triggerEmotion('thinking')">Thinking</button>
+                <button onclick="window.app.triggerEmotion('alert')">Alert</button>
+                <button onclick="window.app.triggerEmotion('sad')">Sad</button>
+                <button onclick="window.app.triggerEmotion('surprised')">Surprised</button>
+                <button onclick="window.app.triggerEmotion('sleeping')">Sleeping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load modules -->
+    <script src="js/renderer.js"></script>
+    <script src="js/animator.js"></script>
+    <script src="js/character.js"></script>
+    <script src="js/websocket-client.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
