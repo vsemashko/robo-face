@@ -1,0 +1,117 @@
+{
+  "character": "robo-face",
+  "version": "1.0.0",
+  "baseSize": 200,
+  "colors": {
+    "idle": "#4A90E2",
+    "happy": "#7ED321",
+    "thinking": "#F5A623",
+    "alert": "#F8E71C",
+    "sad": "#D0021B",
+    "surprised": "#BD10E0",
+    "sleeping": "#4A4A4A"
+  },
+  "animations": {
+    "idle": {
+      "breatheSpeed": 2,
+      "breatheAmount": 5,
+      "blinkInterval": {
+        "min": 2000,
+        "max": 5000
+      },
+      "blinkDuration": 150,
+      "eyeWidth": 25,
+      "eyeHeight": 30
+    },
+    "happy": {
+      "particleCount": 5,
+      "particleTypes": ["★", "♥", "•"],
+      "particleInterval": 100,
+      "celebrationDuration": 1000,
+      "eyeArchRadius": 15,
+      "mouthArchRadius": 35
+    },
+    "thinking": {
+      "eyeMovementSpeed": 5,
+      "eyeChangeInterval": {
+        "min": 1000,
+        "max": 2000
+      },
+      "eyeRange": {
+        "x": [-5, 5],
+        "y": [-5, 5]
+      },
+      "pupilSize": 5,
+      "eyeWidth": 20,
+      "eyeHeight": 25
+    },
+    "alert": {
+      "pulseSpeed": 8,
+      "pulseAmount": 0.1,
+      "eyeSize": 35,
+      "mouthRadius": 15,
+      "glowIntensity": 40
+    },
+    "sad": {
+      "eyeArchRadius": 15,
+      "mouthArchRadius": 35,
+      "eyeWidth": 25,
+      "eyeHeight": 20,
+      "dropAmount": -10
+    },
+    "surprised": {
+      "eyeSize": 40,
+      "mouthRadius": 20,
+      "highlightSize": 8,
+      "highlightOffset": {
+        "x": -5,
+        "y": -5
+      },
+      "highlightAlpha": 0.5
+    },
+    "sleeping": {
+      "zzzInterval": 2000,
+      "zzzProbability": 0.05,
+      "zzzParticleChar": "Z",
+      "zzzOffset": {
+        "x": 30,
+        "y": -20
+      },
+      "eyeWidth": 30,
+      "mouthCurveAmount": -5
+    }
+  },
+  "antenna": {
+    "length": 40,
+    "width": 4,
+    "tipRadius": 8,
+    "swaySpeed": 0.5,
+    "swayAmount": 3,
+    "blinkSpeed": 10,
+    "blinkStates": ["thinking", "alert"]
+  },
+  "face": {
+    "borderRadius": 30,
+    "innerSizeRatio": 0.9,
+    "innerBorderRadius": 25,
+    "highlightWidth": 2,
+    "highlightAlpha": 0.3,
+    "highlightOffset": {
+      "x": 10,
+      "y": 40
+    }
+  },
+  "particles": {
+    "maxCount": 20,
+    "decayRange": [0.5, 1.0],
+    "velocityRange": {
+      "x": [-50, 50],
+      "y": [-50, -20]
+    },
+    "fontSize": 20
+  },
+  "transitions": {
+    "duration": 500,
+    "colorInterpolationSpeed": 0.1
+  }
+}

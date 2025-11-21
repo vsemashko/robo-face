@@ -4,6 +4,7 @@ const http = require('http');
 const WebSocket = require('ws');
 const path = require('path');
 const EventManager = require('./event-manager');
+const MqttClient = require('./mqtt-client');
 
 const app = express();
 const server = http.createServer(app);
@@ -19,6 +20,10 @@ app.use(express.static(PUBLIC_DIR));
 
 // Initialize Event Manager
 const eventManager = new EventManager();
+
+// Initialize MQTT Client (if enabled)
+const mqttClient = new MqttClient(eventManager);
+mqttClient.connect();
 
 // WebSocket connection handling
 const clients = new Set();
@@ -152,6 +157,7 @@ server.listen(PORT, () => {
 // Graceful shutdown
 process.on('SIGTERM', () => {
   console.log('SIGTERM received, shutting down gracefully...');
+  mqttClient.disconnect();
   server.close(() => {
     console.log('Server closed');
     process.exit(0);
@@ -160,6 +166,7 @@ process.on('SIGTERM', () => {
 
 process.on('SIGINT', () => {
   console.log('SIGINT received, shutting down gracefully...');
+  mqttClient.disconnect();
   server.close(() => {
     console.log('Server closed');
     process.exit(0);
