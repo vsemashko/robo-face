@@ -5,6 +5,7 @@ const WebSocket = require('ws');
 const path = require('path');
 const EventManager = require('./event-manager');
 const MqttClient = require('./mqtt-client');
+const VoicePlugin = require('./voice-plugin');
 
 const app = express();
 const server = http.createServer(app);
@@ -24,6 +25,10 @@ const eventManager = new EventManager();
 // Initialize MQTT Client (if enabled)
 const mqttClient = new MqttClient(eventManager);
 mqttClient.connect();
+
+// Initialize Voice Plugin (if enabled)
+const voicePlugin = new VoicePlugin(eventManager);
+
 
 // WebSocket connection handling
 const clients = new Set();
@@ -127,8 +132,64 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     uptime: process.uptime(),
     clients: clients.size,
-    currentState: eventManager.getCurrentState()
+    currentState: eventManager.getCurrentState(),
+    voiceEnabled: voicePlugin.isEnabled()
   });
+});
+
+// Voice conversation endpoint
+app.post('/api/voice/chat', async (req, res) => {
+  try {
+    if (!voicePlugin.isEnabled()) {
+      return res.status(400).json({
+        error: 'Voice plugin is not enabled'
+      });
+    }
+
+    const { text, character, sessionId } = req.body;
+
+    if (!text) {
+      return res.status(400).json({
+        error: 'Text input is required'
+      });
+    }
+
+    const response = await voicePlugin.processVoiceInput(
+      text,
+      character || 'robo-face',
+      sessionId || 'default'
+    );
+
+    // Broadcast emotion change to WebSocket clients
+    if (response.emotion) {
+      broadcastToClients({
+        type: 'voice',
+        emotion: response.emotion,
+        character: character
+      });
+    }
+
+    res.json(response);
+  } catch (error) {
+    console.error('Error processing voice chat:', error);
+    res.status(500).json({
+      error: error.message
+    });
+  }
+});
+
+// Clear voice conversation history
+app.post('/api/voice/clear', (req, res) => {
+  const { sessionId } = req.body;
+  voicePlugin.clearHistory(sessionId || 'default');
+  res.json({ success: true });
+});
+
+// Get voice conversation history
+app.get('/api/voice/history/:sessionId?', (req, res) => {
+  const sessionId = req.params.sessionId || 'default';
+  const history = voicePlugin.getHistory(sessionId);
+  res.json({ history });
 });
 
 // Serve main page

@@ -46,6 +46,20 @@
             </div>
         </div>
 
+        <!-- Voice controls (hidden in production and if voice disabled) -->
+        <div id="voice-controls" class="voice-controls" style="display: none;">
+            <h3>Voice Chat</h3>
+            <button id="voice-btn" class="voice-btn" onclick="window.app.toggleVoice()">
+                🎤 Push to Talk
+            </button>
+            <div id="voice-status" class="voice-status">
+                Voice: Disabled
+            </div>
+            <button class="voice-clear-btn" onclick="window.app.clearVoiceHistory()">
+                Clear History
+            </button>
+        </div>
+
         <!-- Test controls (hidden in production) -->
         <div id="test-controls" class="test-controls">
             <h3>Emotions</h3>
@@ -80,6 +94,7 @@
     <script src="js/character-manager.js"></script>
 
     <script src="js/websocket-client.js"></script>
+    <script src="js/voice-client.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
